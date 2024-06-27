@@ -1,16 +1,17 @@
 resource "aws_fsx_ontap_volume" "volume" {
-  for_each = local.volumes
+  for_each                   = local.volumes
   storage_virtual_machine_id = aws_fsx_ontap_storage_virtual_machine.svm[each.value.svm].id
-  name                       = each.value.name
+  name                       = each.key
 
-  ontap_volume_type          = each.value.securityStyle
-  size_in_megabytes          = 1024 * each.value.size # 100 GB
-
-  dynamic tiering_policy {
-    for_each = [each.value.tiering_policy]
+  ontap_volume_type = each.value.ontap-volume-type
+  security_style    = each.value.security-style
+  size_in_megabytes = 1024 * tonumber(each.value.size) # 100 GB
+  junction_path     = "${each.value.junction-path}"
+  dynamic "tiering_policy" {
+    for_each = [each.value.tiering-policy]
     content {
-      cooling_period = tiering_policy.value.cooling_period
-      name           = tiering_policy.value.name
+      cooling_period = tonumber(each.value.tiering-policy.cooling-period)
+      name           = each.value.tiering-policy.name
     }
   }
 

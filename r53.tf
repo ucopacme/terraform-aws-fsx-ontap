@@ -1,8 +1,8 @@
 resource "aws_route53_zone" "fsx" {
-  name = "${var.cluster_name}.ucop.edu"
+  name = "${var.cluster-name}.ucop.edu"
 
   vpc {
-    vpc_id = var.vpc_id
+    vpc_id = var.vpc-id
   }
 
   tags = local.tags
@@ -13,7 +13,7 @@ resource "aws_route53_record" "fs_management" {
   name    = "management.fs"
   type    = "CNAME"
   ttl     = "300"
-  records = [aws_fsx_ontap_file_system.fsx_ontap.endpoints[0].management[0].dns_name]
+  records = [aws_fsx_ontap_file_system.fsx-ontap.endpoints[0].management[0].dns_name]
 }
 
 resource "aws_route53_record" "fs_intercluster" {
@@ -21,7 +21,7 @@ resource "aws_route53_record" "fs_intercluster" {
   name    = "intercluster.fs"
   type    = "CNAME"
   ttl     = "300"
-  records = [aws_fsx_ontap_file_system.fsx_ontap.endpoints[0].intercluster[0].dns_name]
+  records = [aws_fsx_ontap_file_system.fsx-ontap.endpoints[0].intercluster[0].dns_name]
 }
 
 resource "aws_route53_record" "svm_iscsi" {

@@ -1,19 +1,19 @@
-resource "random_password" "fsx_ontap_password" {
+resource "random_password" "fsx-ontap-password" {
   length           = 16
   special          = true
   override_special = "_%@"
 }
 
-resource "aws_secretsmanager_secret" "fsx_ontap_password" {
-  name = join("/", ["fsx-ontap", local.name, "fsxadmin-password"])
+resource "aws_secretsmanager_secret" "fsx-ontap-password" {
+  name = join("/", ["fsx-ontap", var.cluster-name, "fsxadmin-password"])
 
   tags = local.tags
 }
 
 # Generate a first-time password
-resource "aws_secretsmanager_secret_version" "fsx_ontap_password" {
-  secret_id     = aws_secretsmanager_secret.fsx_ontap_password.id
-  secret_string = random_password.fsx_ontap_password.result
+resource "aws_secretsmanager_secret_version" "fsx-ontap-password" {
+  secret_id     = aws_secretsmanager_secret.fsx-ontap-password.id
+  secret_string = random_password.fsx-ontap-password.result
 
   lifecycle {
     ignore_changes = [secret_string]
@@ -21,6 +21,6 @@ resource "aws_secretsmanager_secret_version" "fsx_ontap_password" {
 }
 
 # Get latest secret from Secrets Manager in case it's been updated manually
-data "aws_secretsmanager_secret_version" "fsx_ontap_password" {
-  secret_id = aws_secretsmanager_secret.fsx_ontap_password.id
+data "aws_secretsmanager_secret_version" "fsx-ontap-password" {
+  secret_id = aws_secretsmanager_secret.fsx-ontap-password.id
 }
