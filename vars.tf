@@ -67,7 +67,7 @@ variable "fs-deployment-type" {
   description = "Deployment type for the FSx ONTAP file system"
   type        = string
 
-  default = "SINGLE-AZ-1"
+  default = "SINGLE_AZ_1"
 }
 
 variable "fs-retention-days" {
