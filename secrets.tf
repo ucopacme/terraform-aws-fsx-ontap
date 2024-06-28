@@ -10,11 +10,12 @@ resource "aws_secretsmanager_secret" "fsx-ontap-password" {
   tags = local.tags
 }
 
-# Generate a first-time password
 resource "aws_secretsmanager_secret_version" "fsx-ontap-password" {
   secret_id     = aws_secretsmanager_secret.fsx-ontap-password.id
   secret_string = random_password.fsx-ontap-password.result
 
+  # This is a one-time password, so we don't want to update it. It will be managed in
+  # Secrets Manager after the initial creation.
   lifecycle {
     ignore_changes = [secret_string]
   }
@@ -24,5 +25,6 @@ resource "aws_secretsmanager_secret_version" "fsx-ontap-password" {
 data "aws_secretsmanager_secret_version" "fsx-ontap-password" {
   secret_id = aws_secretsmanager_secret.fsx-ontap-password.id
 
+  # This should resolve a race condition where it's read before the initial secret is set 
   depends_on = [aws_secretsmanager_secret_version.fsx-ontap-password]
 }

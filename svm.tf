@@ -1,4 +1,4 @@
-# Security Groups
+# Generate all the security groups required to set up the cluster and then operate it.
 module "sg-fsx-ontap" {
   source                 = "git::https://git@github.com/ucopacme/terraform-aws-security-group.git//"
   enabled                = true
@@ -46,13 +46,13 @@ module "sg-fsx-ontap" {
   tags = local.tags
 }
 
-# for each svm create an svm if svm.active-directory is set
+# This generates an SVM for ever top level map in svm-volume-map.
 resource "aws_fsx_ontap_storage_virtual_machine" "svm" {
   for_each       = var.svm-volume-map
   file_system_id = aws_fsx_ontap_file_system.fsx-ontap.id
   name           = each.key
 
-  # if each.value.active-directory-configuration is set
+  # Only join the AD if the configuration is found in the map.
   dynamic "active_directory_configuration" {
     for_each = lookup(each.value, "active-directory", {})
     content {
