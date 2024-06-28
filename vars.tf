@@ -56,7 +56,7 @@ variable "fs-ssd-capacity-gb" {
   default = 1024
 }
 
-variable "fs-ssd-throughput-mbps" {
+variable "fs-ssd-throughput-iops" {
   description = "Throughput capacity for the FSx ONTAP file system"
   type        = number
 
