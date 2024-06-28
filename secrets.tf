@@ -23,4 +23,6 @@ resource "aws_secretsmanager_secret_version" "fsx-ontap-password" {
 # Get latest secret from Secrets Manager in case it's been updated manually
 data "aws_secretsmanager_secret_version" "fsx-ontap-password" {
   secret_id = aws_secretsmanager_secret.fsx-ontap-password.id
+
+  depends_on = [aws_secretsmanager_secret_version.fsx-ontap-password]
 }
