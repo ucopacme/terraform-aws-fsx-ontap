@@ -5,7 +5,7 @@ resource "aws_fsx_ontap_volume" "volume" {
 
   ontap_volume_type = each.value.ontap-volume-type
   security_style    = each.value.security-style
-  size_in_megabytes = 1024 * tonumber(each.value.size)
+  size_in_megabytes = 1024 * tonumber(each.value.size-gb)
   junction_path     = "${each.value.junction-path}"
   dynamic "tiering_policy" {
     for_each = [each.value.tiering-policy]

@@ -7,8 +7,8 @@ resource "aws_fsx_ontap_file_system" "fsx-ontap" {
 
   automatic_backup_retention_days = var.fs-retention-days
   deployment_type                 = var.fs-deployment-type
-  storage_capacity                = var.fs-ssd-capacity
-  throughput_capacity             = var.fs-ssd-throughput
+  storage_capacity                = var.fs-ssd-capacity-gb
+  throughput_capacity             = var.fs-ssd-throughput-mbps
 
   tags = local.tags
 }

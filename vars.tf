@@ -49,14 +49,14 @@ variable "svm-volume-map" {
   # }
 }
 
-variable "fs-ssd-capacity" {
+variable "fs-ssd-capacity-gb" {
   description = "Storage capacity for the FSx ONTAP file system"
   type        = number
 
   default = 1024
 }
 
-variable "fs-ssd-throughput" {
+variable "fs-ssd-throughput-mbps" {
   description = "Throughput capacity for the FSx ONTAP file system"
   type        = number
 

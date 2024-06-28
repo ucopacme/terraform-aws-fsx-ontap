@@ -8,7 +8,7 @@ locals {
   volumes = merge([
     for svm, volumes in var.svm-volume-map : {
       for volume, volume-config in volumes.volumes : volume => {
-          size          = lookup(volume-config, "size", 100)
+          size-gb          = lookup(volume-config, "size-gb", 100)
           security-style = lookup(volume-config, "security-style", "UNIX")
           svm           = svm
           name = lookup(volume-config, "name", "")
