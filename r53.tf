@@ -52,3 +52,12 @@ resource "aws_route53_record" "svm_management" {
   ttl     = "300"
   records = [each.value.endpoints[0].management[0].dns_name]
 }
+
+resource "aws_route53_record" "svm_smb" {
+  for_each = aws_fsx_ontap_storage_virtual_machine.svm
+  zone_id = aws_route53_zone.fsx.zone_id
+  name    = "smb.${each.key}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [each.value.endpoints[0].management[0].dns_name]
+}

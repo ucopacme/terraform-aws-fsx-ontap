@@ -54,14 +54,15 @@ resource "aws_fsx_ontap_storage_virtual_machine" "svm" {
 
   # Only join the AD if the configuration is found in the map.
   dynamic "active_directory_configuration" {
-    for_each = lookup(each.value, "active-directory", {})
+    for_each = contains(keys(each.value), "active-directory") ? [1] : []
     content {
       netbios_name = each.value.active-directory.netbios-name
       self_managed_active_directory_configuration {
-        dns_ips     = each.value.active-directory.dns-ips
-        domain_name = each.value.active-directory.domain-name
-        password    = each.value.active-directory.password
-        username    = each.value.active-directory.username
+        dns_ips                                = each.value.active-directory.dns-ips
+        domain_name                            = "ad.ucop.edu"
+        password                               = each.value.active-directory.password
+        username                               = each.value.active-directory.username
+        organizational_unit_distinguished_name = "OU=AWS-FSX-ONTAP,DC=AD,DC=UCOP,DC=EDU"
       }
     }
   }
