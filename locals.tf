@@ -1,6 +1,6 @@
 
 locals {
-  name = join("-", [local.tags.application, local.tags.environment, var.cluster-name])
+  name = join("-", [local.tags["ucop:application"], local.tags["ucop:environment"], var.cluster-name])
 
   cidrs = flatten([var.sg-cidrs, []])
 
