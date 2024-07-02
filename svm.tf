@@ -59,7 +59,7 @@ resource "aws_fsx_ontap_storage_virtual_machine" "svm" {
       netbios_name = each.value.active-directory.netbios-name
       self_managed_active_directory_configuration {
         dns_ips                                = each.value.active-directory.dns-ips
-        domain_name                            = "ad.ucop.edu"
+        domain_name                            = "AD.UCOP.EDU"
         password                               = each.value.active-directory.password
         username                               = each.value.active-directory.username
         organizational_unit_distinguished_name = "OU=AWS-FSX-ONTAP,DC=AD,DC=UCOP,DC=EDU"
