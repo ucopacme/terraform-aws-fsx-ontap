@@ -6,6 +6,7 @@ output "route53_records" {
     fs_intercluster = aws_route53_record.fs_intercluster.fqdn,
     svm_iscsi = { for k, v in aws_route53_record.svm_iscsi : k => v.fqdn },
     svm_nfs = { for k, v in aws_route53_record.svm_nfs : k => v.fqdn },
+    svm_smb = { for k, v in aws_route53_record.svm_smb : k => v.fqdn },
     svm_management = { for k, v in aws_route53_record.svm_management : k => v.fqdn },
    }
 }
