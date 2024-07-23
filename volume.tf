@@ -20,4 +20,15 @@ resource "aws_fsx_ontap_volume" "volume" {
   }
 
   tags = local.tags
+
+  lifecycle {
+    ignore_changes = [
+      storage_efficiency_enabled,
+      security_style,
+      ontap_volume_type,
+      junction_path,
+      size_in_megabytes,
+      tiering_policy,
+    ]
+  }
 }

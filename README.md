@@ -1,3 +1,6 @@
+## Special Notes
+Updating any nested volumes will not trigger a redeployment of them. Please change these resources in the console. This is done as a measure to protect against external control plane related changes causing incidental regressions in these volumes. 
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
