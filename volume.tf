@@ -23,13 +23,11 @@ resource "aws_fsx_ontap_volume" "volume" {
 
   lifecycle {
     ignore_changes = [
-      storage_virtual_machine_id,
       storage_efficiency_enabled,
       security_style,
       ontap_volume_type,
       junction_path,
       size_in_megabytes,
-      tiering_policy,
     ]
   }
 }
