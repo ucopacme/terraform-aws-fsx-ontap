@@ -14,7 +14,7 @@ variable "fs-deployment-type" {
   description = "Deployment type for the FSx ONTAP file system"
   type        = string
 
-  default = "SINGLE_AZ_1"
+  default = "SINGLE_AZ_2"
 }
 
 variable "fs-maintenance-start-time" {

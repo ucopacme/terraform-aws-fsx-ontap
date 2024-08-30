@@ -93,7 +93,7 @@ module "fsx" {
   subnet-ids          = [data.terraform_remote_state.vpc-chs-dev-vpc.outputs.data_subnet_ids[0]] # One subnet id is required for single_az_1
   vpc-id              = data.terraform_remote_state.vpc-chs-dev-vpc.outputs.vpc_id
 
-  fs-deployment-type     = "SINGLE_AZ_1"
+  fs-deployment-type     = "SINGLE_AZ_2"
   fs-retention-days      = 30
   fs-ssd-capacity-gb     = 1024
   fs-ssd-throughput-iops = 128
