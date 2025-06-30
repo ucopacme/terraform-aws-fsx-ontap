@@ -57,6 +57,13 @@ variable "sg-cidrs" {
   default = []
 }
 
+variable "slug-name" {
+  description = "Slug name to use for the cluster. If not set, it will be derived from the application and environment tags."
+  type        = string
+
+  default = null
+}
+
 variable "subnet-ids" {
   description = "Subnet IDs to use for the FSx ONTAP file system"
   type        = list(string)

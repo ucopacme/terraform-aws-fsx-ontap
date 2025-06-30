@@ -26,9 +26,9 @@ module "sg-fsx-ontap" {
     ],
     [
       {
-        description = "ICMP"
-        from_port   = "0"
-        to_port     = "0"
+        description = "ICMP - manual"
+        from_port   = "-1"
+        to_port     = "-1"
         protocol    = "icmp"
         cidr_blocks = local.cidrs
       }

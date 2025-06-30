@@ -15,4 +15,12 @@ resource "aws_fsx_ontap_file_system" "fsx-ontap" {
   tags = merge(local.tags, {
     Name = var.cluster-name
   })
+
+  lifecycle {
+    ignore_changes = [ 
+      throughput_capacity,
+      fsx_admin_password,
+      daily_automatic_backup_start_time
+    ]
+  }
 }

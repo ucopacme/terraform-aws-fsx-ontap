@@ -1,6 +1,8 @@
 
 locals {
-  name = join("-", [local.tags["ucop:application"], local.tags["ucop:environment"], var.cluster-name])
+  # if var.slug-name is set, use it as the name of the cluster, otherwise use the default name
+  slug-name = try(var.slug-name, join("-", [local.tags["ucop:application"], local.tags["ucop:environment"]]))
+  name = join("-", [local.slug-name, var.cluster-name])
 
   cidrs = flatten([var.sg-cidrs, []])
 

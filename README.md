@@ -6,13 +6,13 @@ Updating any nested volumes will not trigger a redeployment of them. Please chan
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.53 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.58 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.53 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.58 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -33,6 +33,7 @@ Updating any nested volumes will not trigger a redeployment of them. Please chan
 | [aws_route53_record.svm_iscsi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.svm_management](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.svm_nfs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.svm_smb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_zone.fsx](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
 | [aws_secretsmanager_secret.fsx-ontap-password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret_version.fsx-ontap-password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
@@ -45,15 +46,16 @@ Updating any nested volumes will not trigger a redeployment of them. Please chan
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster-name"></a> [cluster-name](#input\_cluster-name) | Name of the cluster | `string` | n/a | yes |
 | <a name="input_fs-backup-start-time"></a> [fs-backup-start-time](#input\_fs-backup-start-time) | Daily automatic backup start time for the FSx ONTAP file system | `string` | `"02:00"` | no |
-| <a name="input_fs-deployment-type"></a> [fs-deployment-type](#input\_fs-deployment-type) | Deployment type for the FSx ONTAP file system | `string` | `"SINGLE_AZ_1"` | no |
+| <a name="input_fs-deployment-type"></a> [fs-deployment-type](#input\_fs-deployment-type) | Deployment type for the FSx ONTAP file system | `string` | `"SINGLE_AZ_2"` | no |
 | <a name="input_fs-maintenance-start-time"></a> [fs-maintenance-start-time](#input\_fs-maintenance-start-time) | Weekly maintenance start time for the FSx ONTAP file system | `string` | `"7:11:00"` | no |
 | <a name="input_fs-retention-days"></a> [fs-retention-days](#input\_fs-retention-days) | Automatic backup retention days for the FSx ONTAP file system | `number` | `30` | no |
 | <a name="input_fs-ssd-capacity-gb"></a> [fs-ssd-capacity-gb](#input\_fs-ssd-capacity-gb) | Storage capacity for the FSx ONTAP file system, in GigaBytes. This cannot be shrunk, only grown. | `number` | `1024` | no |
 | <a name="input_fs-ssd-throughput-mbps"></a> [fs-ssd-throughput-mbps](#input\_fs-ssd-throughput-mbps) | Throughput capacity for the FSx ONTAP file system | `number` | `128` | no |
 | <a name="input_preferred-subnet-id"></a> [preferred-subnet-id](#input\_preferred-subnet-id) | Preferred Subnet ID to use for the FSx ONTAP file system | `string` | n/a | yes |
 | <a name="input_sg-cidrs"></a> [sg-cidrs](#input\_sg-cidrs) | CIDRs to allow in the security group | `list(string)` | `[]` | no |
+| <a name="input_slug-name"></a> [slug-name](#input\_slug-name) | Slug name to use for the cluster. If not set, it will be derived from the application and environment tags. | `string` | `null` | no |
 | <a name="input_subnet-ids"></a> [subnet-ids](#input\_subnet-ids) | Subnet IDs to use for the FSx ONTAP file system | `list(string)` | n/a | yes |
-| <a name="input_svm-volume-map"></a> [svm-volume-map](#input\_svm-volume-map) | Map of SVM names to volume names. Top level configurations are for SVMs, nested configurations are for volumes. | `any` | n/a | yes |
+| <a name="input_svm-volume-map"></a> [svm-volume-map](#input\_svm-volume-map) | Map of SVM names to volume names. Top level configurations are for SVMs, nested configurations are for volumes. For more details and an example, see svm-volume-map.md | `any` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to all resources | `map(string)` | <pre>{<br>  "createdBy": "terraform"<br>}</pre> | no |
 | <a name="input_vpc-id"></a> [vpc-id](#input\_vpc-id) | VPC ID to use for the FSx ONTAP file system | `string` | n/a | yes |
 
